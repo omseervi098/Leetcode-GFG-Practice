@@ -1,3 +1,4 @@
+//In this problem we need to sort the array by parity i.e. all even should come first and all odd should come later
 //1st approach same time but taking more o(n) space
 vector<int> sortArrayByParity(vector<int>& nums) {
     vector<int> arr;
