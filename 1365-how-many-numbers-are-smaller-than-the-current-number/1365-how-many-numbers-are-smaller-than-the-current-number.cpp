@@ -1,15 +1,10 @@
 class Solution {
 public:
     vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
-        vector<int> cpy;
-        for(int i=0;i<nums.size();i++){
-            int cnt=0;
-            for(int j=0;j<nums.size();j++){
-                if(nums[j]<nums[i] and i!=j){
-                    cnt++;
-                }            
-            }
-            cpy.push_back(cnt);
-        }return cpy;
+        int bkt[102]{0};
+        for(int i=0; i<nums.size(); i++) bkt[nums[i] + 1]++;
+        for(int i=1; i<102; i++) bkt[i] += bkt[i-1];
+        for(int i=0; i<nums.size(); i++) nums[i] = bkt[nums[i]];
+        return nums;
     }
 };
