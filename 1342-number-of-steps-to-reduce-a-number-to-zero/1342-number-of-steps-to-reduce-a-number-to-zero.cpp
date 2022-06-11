@@ -6,7 +6,7 @@ public:
             if(num%2==1){
                 num-=1;cnt++;
             }else{
-                num/=2;cnt++;
+                num=num>>1;cnt++;
             }
         }
         return cnt;
