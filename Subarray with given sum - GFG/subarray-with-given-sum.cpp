@@ -14,14 +14,11 @@ class Solution
         long long int sum=0,j=0,i=0;
         vector<int> ans;
         for(;i<n;i++){
-            if(sum<s){
-                sum+=arr[i];
-            }
+            sum+=arr[i];
             while(sum>s)
-            sum-=arr[j++];
-            if(sum==s){
+                sum-=arr[j++];
+            if(sum==s)
                 return {j+1,i+1};
-            }
         }
         return {-1};
     }
