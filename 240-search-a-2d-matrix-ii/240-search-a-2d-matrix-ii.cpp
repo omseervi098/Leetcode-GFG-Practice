@@ -15,11 +15,17 @@ public:
         }return false;
     }
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        for(int i=0;i<matrix.size();i++){
-
-                bool ans=binarysearch(matrix[i],target);
-                if(ans==true)return true;
-            }
+        int rows = matrix.size(),
+			cols = matrix[0].size(),
+            row = 0, col = cols - 1;
+	    // look matrix from top right it will look like bst
+        while (row < rows && col > -1) {
+            int cur = matrix[row][col];
+            if (cur == target) return true;
+            if (target > cur) row++;
+            else col--;
+        }
+        
         return false;
     }
 };
