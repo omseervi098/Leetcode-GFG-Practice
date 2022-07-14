@@ -27,7 +27,7 @@ int main()
 }
 // } Driver Code Ends
 
-
+//time complexity o(n*log(max-min)
 int count(int mat[MAX][MAX],int mid,int n){
     int i=0,j=n-1,ans=0;
     while(i<n and j>=0){
