@@ -13,17 +13,22 @@ class Solution{
     int maxLen(vector<int>&A, int n)
     {   
         // Your code here
-        int sum=0;
+        int j=0,sum=0;
+        vector<int> presum;
+        for(auto it:A){
+            sum+=it;
+            presum.push_back(sum);
+        }
         unordered_map<int,int> map;
         map[0]=-1;
         int len=0;
+        if(sum==0)return n;
         for(int i=0;i<n;i++){
-            sum+=A[i];
-            if(map.count(sum)){
-                int k=i-map[sum];
+            if(map.count(presum[i])){
+                int k=i-map[presum[i]];
                 len=max(len,k);
             }else{
-                map[sum]=i;
+                map[presum[i]]=i;
             }
            //15 -2 2 -8 1 7 10 23
            //15 13 15 7 8 15 25 48
