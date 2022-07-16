@@ -19,9 +19,7 @@ public:
             it=it*it;
         for(auto it:ans){
             cout<<it<<" "; 
-        }for(auto it:num){
-            cout<<it<<" ";
-        }cout<<endl;
+        }
         vector<int> fans;
         int i=0,j=0;
         int m=ans.size(),n=num.size();
