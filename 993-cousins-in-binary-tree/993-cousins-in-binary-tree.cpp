@@ -17,25 +17,25 @@ public:
             return -1;
     }
 }
-bool issibling(TreeNode* root,int p,int q){
+bool isnotsibling(TreeNode* root,int p,int q){
     if(root==nullptr||(root->left==nullptr and root->right==nullptr))
-        return false;
+        return true;
     if(root->left==nullptr){
-        return issibling(root->right,p,q);
+        return isnotsibling(root->right,p,q);
     }else if(root->right==nullptr)
-        return issibling(root->left,p,q);
+        return isnotsibling(root->left,p,q);
     else{
         if(root->left->val==p and root->right->val==q)
-          return true;
+          return false;
         else if(root->left->val==q and root->right->val==p)
-          return true;
-        return issibling(root->left,p,q)|| issibling(root->right,p,q);
+          return false;
+        return isnotsibling(root->left,p,q) and isnotsibling(root->right,p,q);
     }
 }
     bool isCousins(TreeNode* root, int x, int y) {
          if(root==nullptr)
         return false;
         
-    return (depthofgivennode(root,x)==depthofgivennode(root,y) and !issibling(root,x,y));
+    return (depthofgivennode(root,x)==depthofgivennode(root,y) and isnotsibling(root,x,y));
     }
 };
