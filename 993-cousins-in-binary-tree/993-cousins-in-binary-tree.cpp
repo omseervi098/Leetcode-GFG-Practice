@@ -1,41 +1,53 @@
-
-class Solution {
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution
+{
 public:
-    int depthofgivennode(TreeNode* root,int val){
-    if(root==NULL)
-        return -1;
-    if(root->val==val)
-    return 0;
-    int d1=depthofgivennode(root->left,val);
-    if(d1!=-1)
-        return d1+1;
-    else{
-        int d2=depthofgivennode(root->right,val);
-        if(d2!=-1)
-            return d2+1;
-        else
-            return -1;
-    }
-}
-bool isnotsibling(TreeNode* root,int p,int q){
-    if(root==nullptr||(root->left==nullptr and root->right==nullptr))
-        return true;
-    if(root->left==nullptr){
-        return isnotsibling(root->right,p,q);
-    }else if(root->right==nullptr)
-        return isnotsibling(root->left,p,q);
-    else{
-        if(root->left->val==p and root->right->val==q)
-          return false;
-        else if(root->left->val==q and root->right->val==p)
-          return false;
-        return isnotsibling(root->left,p,q) and isnotsibling(root->right,p,q);
-    }
-}
-    bool isCousins(TreeNode* root, int x, int y) {
-         if(root==nullptr)
+    bool isCousins(TreeNode *root, int x, int y)
+    {
+
+        if (root == NULL)
+            return false;
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(nullptr);
+        bool a=false,b=false;
+        while (!q.empty())
+        {
+            TreeNode*front = q.front();
+            q.pop();
+            if(front==nullptr){
+                if(a and b)return true;
+                a=0;b=0;
+                if(q.empty())
+                    break;
+                q.push(nullptr);
+                continue;
+            }
+            if(front->val==x)
+                a=1;
+            else if(front->val==y)
+                b=1;
+            if(front->left!=nullptr and front->right!=nullptr){
+                if(front->left->val==x and front->right->val==y)
+                    return false;
+                else if(front->left->val==y and front->right->val==x)
+                    return false;
+            }
+            if (front->left != NULL)
+                q.push(front->left);
+            if (front->right != NULL)
+                q.push(front->right);
+        }
         return false;
-        
-    return (depthofgivennode(root,x)==depthofgivennode(root,y) and isnotsibling(root,x,y));
     }
 };
