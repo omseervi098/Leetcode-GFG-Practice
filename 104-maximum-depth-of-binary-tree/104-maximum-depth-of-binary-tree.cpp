@@ -16,9 +16,7 @@ public:
             return 0;
         int ld=maxDepth(root->left);
         int rd=maxDepth(root->right);
-        if(ld==0 or rd==0)
-            return 1+ld+rd;
-        else
+     
             return 1+max(ld,rd);
     }
 };
