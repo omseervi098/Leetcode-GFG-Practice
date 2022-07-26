@@ -1,20 +1,45 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& arr) {
-        int n=arr.size();
-        sort(arr.begin(),arr.end());
-        int mxlen=0;
-        for(int i=0;i<n;i++){
-           int st=arr[i];
-           int k=i;
-           int skips=0;
-           while(i<n-1 and (arr[i]+1==arr[i+1]||arr[i]==arr[i+1])){
-              if(arr[i]==arr[i+1]) skips++;
-              i++;
+       int n=arr.size();
+       unordered_map<int,int> map; 
+       unordered_map<int,bool> m;
+       for(int i=0;i<n;i++)
+       {
+          m[arr[i]]=true;
+          map[arr[i]]=i;
+       }
+       int mxst=0,mxlen=0,size=0;
+       for(int i=0;i<n;i++){
+           size=0;
+           if(m[arr[i]]){
+              int st=arr[i];
+              size++;
+              int j=st+1;
+              while(m.count(j)){
+                 m[j]=false;
+                 size++;
+                 j++;
+              }
+              j=st-1;
+              while(m.count(j)){
+                 st=j;
+                 m[j]=false;
+                 size++;
+                 j--;
+              }
+              if(size>mxlen){
+                 mxst=st;
+                 mxlen=size;
+              }
+              if(size==mxlen){
+                 if(map[st]<map[mxst]){
+                     mxst=st;
+                     mxlen=size;
+                 }
+               }
            }
-           if((i-k-skips)+1>=mxlen)
-              mxlen=(i-k-skips)+1;   
-        }
-        return mxlen;
+       }
+       return mxlen;
     }
 };
