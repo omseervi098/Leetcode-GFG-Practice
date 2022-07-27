@@ -12,6 +12,5 @@ public:
                 ++cnt;
         }
         return mx;
-        return 0;
     }
 };
