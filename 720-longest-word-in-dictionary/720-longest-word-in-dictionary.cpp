@@ -32,16 +32,15 @@ class Trie {
     void insertWord(string word) {
         insertWord(root,word);
     }
-    bool search(TrieNode* node,string word){
-        if(!word.size()) return node->isTerminal;
-        int idx=word[0]-'a';
-        if(node->children[idx])
-            return search(node->children[idx],word.substr(1));
-        else
-            return false;
-    }
-    bool search(string word){
-        return search(root,word);
+    bool search(string s){
+        TrieNode* curr = root;
+		for(int i = 0 ; i < s.size() ; i++){
+			  if(curr -> children[s[i] - 'a'] == nullptr){
+				  return false;
+			  }
+			  curr = curr -> children[s[i] - 'a'];
+		  }
+		  return (curr -> isTerminal);
     }
 
 
