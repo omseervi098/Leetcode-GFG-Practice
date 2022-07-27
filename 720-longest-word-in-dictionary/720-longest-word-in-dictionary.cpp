@@ -1,11 +1,9 @@
 class TrieNode {
    public:
-    char data;
     TrieNode **children;
     bool isTerminal;
 
-    TrieNode(char data) {
-        this->data = data;
+    TrieNode() {
         children = new TrieNode *[26];
         for (int i = 0; i < 26; i++) {
             children[i] = NULL;
@@ -20,7 +18,7 @@ class Trie {
     int count;
     Trie() {
         this->count = 0;
-        root = new TrieNode('\0');
+        root = new TrieNode();
     }
     bool insertWord(TrieNode *root, string word) {
         // Base case
@@ -38,7 +36,7 @@ class Trie {
         if (root->children[index] != NULL) {
             child = root->children[index];
         } else {
-            child = new TrieNode(word[0]);
+            child = new TrieNode();
             root->children[index] = child;
         }
         // Recursive call
