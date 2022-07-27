@@ -1,18 +1,13 @@
 class Trinode {
    public:
-    char data;
-    Trinode **child;
+    Trinode *child[26];
     bool isterminal;
-    int childCount;
 
-    Trinode(char data) {
-        this->data = data;
-        child= new Trinode *[26];
+    Trinode() {
         for (int i = 0; i < 26; i++) {
             child[i] = NULL;
         }
         isterminal = false;
-        childCount = 0;
     }
 };
 
@@ -20,22 +15,17 @@ class WordDictionary {
     Trinode *root;
 public:
     WordDictionary() {
-        root = new Trinode('\0');
+        root = new Trinode();
     }
     void insert(Trinode* node,string word){
-        if(!word.size()) {
-            node->isterminal=true;
-            return;}
-        int idx=word[0]-'a';
-        Trinode* child;
-        if(node->child[idx]!=NULL)
-            child=node->child[idx];
-        else
-        {
-            child=new Trinode(word[0]);
-            node->child[idx]=child;
+        Trinode *t=node;
+        for(auto &it:word){
+            if(!t->child[it-'a']){
+                t->child[it-'a']=new Trinode();
+            }
+            t=t->child[it-'a'];
         }
-        insert(child,word.substr(1));
+        t->isterminal=true;
     }
     void addWord(string word) {
         insert(root,word);
