@@ -20,32 +20,17 @@ class Trie {
         this->count = 0;
         root = new TrieNode();
     }
-    bool insertWord(TrieNode *root, string word) {
-        // Base case
-        if (word.size() == 0) {
-            if (!root->isTerminal) {
-                root->isTerminal = true;
-                return true;
-            } else {
-                return false;
-            }
+    void insertWord(TrieNode *node, string word) {
+        TrieNode* curr=node;
+        for(auto it:word){
+             if(!curr -> children[it - 'a'])
+				  curr -> children[it - 'a'] = new TrieNode();
+			 curr = curr -> children[it - 'a'];
         }
-        // Small calculation
-        int index = word[0] - 'a';
-        TrieNode *child;
-        if (root->children[index] != NULL) {
-            child = root->children[index];
-        } else {
-            child = new TrieNode();
-            root->children[index] = child;
-        }
-        // Recursive call
-        return insertWord(child, word.substr(1));
+        curr->isTerminal=true;
     }
     void insertWord(string word) {
-        if (insertWord(root, word)) {
-            this->count++;
-        }
+        insertWord(root,word);
     }
     bool search(TrieNode* node,string word){
         if(!word.size()) return node->isTerminal;
