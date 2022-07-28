@@ -1,25 +1,21 @@
 class Solution {
 public:
-    void permute(vector<int>& nums,vector<int> output,vector<vector<int>>&v) {
-        if(nums.size()==0)
+    void permute(vector<int>& nums,int idx,vector<vector<int>>&v) {
+        if(nums.size()==idx)
         {
-            v.push_back(output);
+            v.push_back(nums);
             return;
         }
-        for(int i=0;i<nums.size();i++)
+        for(int i=idx;i<nums.size();i++)
         {
-            vector<int>cpy;
-            cpy=nums;
-            cpy.erase(cpy.begin()+i);
-            output.push_back(nums[i]);
-            permute(cpy,output,v);
-            output.pop_back();
+            swap(nums[i],nums[idx]);
+            permute(nums,idx+1,v);
+            swap(nums[i],nums[idx]);
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<int> output;
         vector<vector<int>> v;
-        permute(nums,output,v);
+        permute(nums,0,v);
         return v;
     }
 };
