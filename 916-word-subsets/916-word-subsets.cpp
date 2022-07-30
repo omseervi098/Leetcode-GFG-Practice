@@ -19,8 +19,8 @@ public:
                 tmp[temp[i]-'a']+=1;
             }
             for(i=0;i<26;i++){
-                if(freq[i]==0)continue;
-                else if(freq[i]>tmp[i]) break;
+    
+               if(freq[i]>tmp[i]) break;
             }
             if(i==26){
                 ans.push_back(it);
