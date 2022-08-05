@@ -15,8 +15,17 @@ public:
         dp[st][target]=inc+exc;
         return inc+exc;
     }
-    int change(int amount, vector<int>& coins) {
-        vector<vector<int>> dp(coins.size()+1,vector<int>(amount+1,-1));
-        return helper(coins,amount,0,dp);
+    int change(int target, vector<int>& nums) {
+       vector<int> dp(target+1,0);
+        dp[0]=1;
+        for(int i=0;i<nums.size();i++){
+            
+            for(int j=1;j<=target;j++){
+                if(j>=nums[i]){
+                    dp[j]=dp[j]+dp[j-nums[i]];
+                }
+            }
+        }
+        return dp[target];
     }
 };
