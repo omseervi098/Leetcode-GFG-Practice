@@ -40,7 +40,5 @@ public:
         tail->next=newnode;
         tail->next=swapPairs(newnode);
         return newhead;
-        
-    
     }
 };
