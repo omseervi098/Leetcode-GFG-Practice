@@ -3,13 +3,7 @@ public:
     vector<vector<int>> rec;
     vector<vector<int>> update;
     SubrectangleQueries(vector<vector<int>>& rectangle) {
-        for(int i=0;i<rectangle.size();i++){
-            vector<int> temp;
-            for(int j=0;j<rectangle[i].size();j++){
-                temp.push_back(rectangle[i][j]);
-            }
-            rec.push_back(temp);
-        }
+        rec=rectangle;
     }
     
     void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue) {
