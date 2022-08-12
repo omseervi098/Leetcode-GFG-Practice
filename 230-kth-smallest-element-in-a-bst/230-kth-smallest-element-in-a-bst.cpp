@@ -11,21 +11,23 @@
  */
 class Solution {
 public:
-    void helper(TreeNode* root,int k,vector<int> &v){
+    int i=0,ans;
+    void helper(TreeNode* root,int k){
         if(root==nullptr)
             return;
-        if(v.size()==k) return;
-        helper(root->left,k,v);
-        if(v.size()==k) return;
-        v.push_back(root->val);
-        helper(root->right,k,v);
+        helper(root->left,k);
+        cout<<root->val<<" "<<i<<endl;
+        i++;
+        if(i==k){
+            ans=root->val;
+            return;
+        }
+        helper(root->right,k);
     }
     int kthSmallest(TreeNode* root, int k) {
         vector<int> v;
-         helper(root,k,v);
-        for(auto it:v)
-            cout<<it<<" ";
-        cout<<endl;
-        return v[v.size()-1];
+
+         helper(root,k);
+        return ans;
     }
 };
