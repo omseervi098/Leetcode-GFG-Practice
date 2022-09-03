@@ -1,19 +1,17 @@
 class Solution {
 public:
     int divide(int div, int d) {
-        int neg=1;
-        
+        int neg=1;  
         if((div>0 and d>0) || (div<0 and d<0)){
-            if(d==-1 and div<=INT_MIN) return INT_MAX;
+            if(d==-1 and div==INT_MIN) return INT_MAX;
+            if(d==1 and div==INT_MIN) return INT_MAX;
             neg=1;
         }else{
             
             neg=-1;
         }
-        //cout<<neg<<endl;
-       long long int a=abs(div);
-       long long int b=abs(d);
-        cout<<a<<" "<<b<<endl;
+        long long int a=abs(div);
+        long long int b=abs(d);
         unsigned int curr=1;
         int ans=0;
         if(b==1) return neg*a;
@@ -41,7 +39,6 @@ public:
             b>>=1;
             curr>>=1;
         }
-       // cout<<ans<<endl;
         return ans*neg;
     }
 };
