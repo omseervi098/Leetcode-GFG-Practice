@@ -15,8 +15,7 @@ public:
                 rows=mid+1;
             }
         }
-         cout<<ans<<endl;
-             
+         
             int st=0,end=matrix[0].size()-1;
             while(st<=end){
                 int mid=(st+end)/2.0;
