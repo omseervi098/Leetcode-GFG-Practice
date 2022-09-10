@@ -1,15 +1,24 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        int ans=0,sum=0;
-        for(int i=1;i<prices.size();i++){
-            int k=prices[i]-prices[i-1];
-            if(k<0){
-                continue;
-            }
-            sum+=k;
-            ans=max(sum,ans);
+    int find(vector<int> &prices,int st,bool buy,vector<vector<int>> &v){
+        if(st>=prices.size()){
+            return 0;
         }
-        return ans;
+        if(v[st][buy]!=-1)return v[st][buy];
+        if(buy){
+            int notbuy=find(prices,st+1,buy,v);
+            int bbuy=-prices[st]+find(prices,st+1,!buy,v);
+            return v[st][buy]=max(notbuy,bbuy);
+        }
+        else {
+            int notsell=find(prices,st+1,buy,v);
+            int sell=prices[st]+find(prices,st+1,!buy,v);
+            return v[st][buy]=max(notsell,sell);
+        }
+    }
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        vector<vector<int>> v(n,vector<int>(2,-1));
+        return find(prices,0,1,v);
     }
 };
