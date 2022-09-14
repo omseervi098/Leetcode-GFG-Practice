@@ -34,7 +34,11 @@ public:
         m[root->val]-=1;
         return ans;
     }
-    int pseudoPalindromicPaths (TreeNode* root) {
-        return helper(root);
+    int pseudoPalindromicPaths (TreeNode* root,int cnt=0) {
+        if(!root)return 0;
+        cnt^=1<<(root->val-1);
+        if(root->left==nullptr and root->right==nullptr and (cnt&(cnt-1))==0) return 1;
+        return pseudoPalindromicPaths(root->left,cnt)+pseudoPalindromicPaths(root->right,cnt);
+            
     }
 };
