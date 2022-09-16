@@ -10,7 +10,20 @@ public:
         return a+b;
     }
     int uniquePaths(int m, int n) {
-        vector<vector<int>>ans(m+1,vector<int>(n+1,-1));
-        return helper(m,n,0,0,ans);
+        vector<int> prevr(n,0);
+	for(int i=0;i<m;i++){
+		vector<int> row(n,0);
+		for(int j=0;j<n;j++){
+			if(i==0 and j==0) row[j]=1;
+			else {
+			    int up=0,left=0;
+			    if(i>0) up=prevr[j];
+			    if(j>0) left=row[j-1];
+			    row[j]=up+left;
+		    }
+		}
+		prevr=row;
+	}
+	return prevr[n-1];
     }
 };
