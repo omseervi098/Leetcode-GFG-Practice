@@ -10,8 +10,7 @@ public:
         if(n1[i]==n2[j]){
             ans=1+mrs(n1,n2,i-1,j-1,dp);
         }
-            int b=mrs(n1,n2,i-1,j,dp);
-            int a=mrs(n1,n2,i,j-1,dp); 
+
         mx=max(mx,ans);
         return dp[i][j]=ans;
     }
