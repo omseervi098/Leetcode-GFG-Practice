@@ -11,8 +11,20 @@ public:
         dp[row][i]=min(isum,i1sum);
         return dp[row][i];
     }
-    int minimumTotal(vector<vector<int>>& triangle) {
-        vector<vector<int>>dp(triangle.size(),vector<int>(triangle.size(),-999999));
-        return helper(triangle,0,triangle.size(),0,dp);
+    int minimumTotal(vector<vector<int>>& v) {
+        int n=v.size();
+	vector<int> curr(n);
+	for(int i=0;i<n;i++){
+		curr[i]=v[n-1][i];
+	}
+	for(int i=n-2;i>=0;i--){
+		vector<int> temp(n);
+		for(int j=i;j>=0;j--){
+			temp[j]=v[i][j]+min(curr[j],curr[j+1]);
+		}
+		curr=temp;
+	}
+	return curr[0];
+
     }
 };
