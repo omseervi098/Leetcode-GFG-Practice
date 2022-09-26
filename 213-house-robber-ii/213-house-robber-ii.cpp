@@ -17,10 +17,10 @@ public:
         if(n==0) return 0;
         if(n==1) return v[0];
         vector<int> temp,temp2;
-	for(int i=0;i<n;i++){
-		if(i!=0) temp.push_back(v[i]);
-		if(i!=n-1) temp2.push_back(v[i]);
-	}
+	   for(int i=0;i<n;i++){
+		  if(i!=0) temp.push_back(v[i]);
+		   if(i!=n-1) temp2.push_back(v[i]);
+     	}
         return max(DP(temp),DP(temp2));
     }
 };
