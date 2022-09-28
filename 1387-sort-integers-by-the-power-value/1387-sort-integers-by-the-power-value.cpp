@@ -1,10 +1,11 @@
 class Solution {
+    unordered_map<int,int> dp;
 public:
     int helper(int x){
-        if(x==1) return 0;
-        if(x&1) return 1+helper(3*x+1);
-        else return 1+helper(x/2);
-        return 0;
+        if(dp[x]|| x==1) return dp[x];
+        if(x&1) dp[x]=1+helper(3*x+1);
+        else dp[x]=1+helper(x/2);
+        return dp[x];
     }
     int getKth(int lo, int hi, int k) {
         vector<pair<int,int>> h;
