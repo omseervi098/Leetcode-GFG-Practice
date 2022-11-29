@@ -29,7 +29,7 @@ public:
         }
         for(int i=0;i<grid.size();i++){
             for(int j=0;j<grid[0].size();j++){
-                grid[i][j]=one1[j]+ones[i]-zero1[j]-zeros[i];
+                grid[i][j]=one1[j]+ones[i]-(grid[0].size()-one1[j])-(grid.size()-ones[i]);
             }
         }
         return grid;
