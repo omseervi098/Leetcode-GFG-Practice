@@ -1,19 +1,14 @@
 class Solution {
 public:
     int minimumAverageDifference(vector<int>& nums) {
-        long long sm=0,n=nums.size(),k=1,mn=INT_MAX,mnidx=0;
-        vector<int> pre,suf(n+1);
-        for(auto it:nums){
-            sm+=it;
-            pre.push_back(sm/k++);
-        }
-        suf[n--]=0;sm=0;k=1;
-        for(int i=n;i>=0;i--){
-            sm+=nums[i];
-            suf[n--]=sm/k++;
-        }
+        long long sm=0;
+        for(auto i:nums) sm+=i;
+        long long pre=0,k=1,n=nums.size(),mn=INT_MAX,mnidx=0;
         for(int i=0;i<nums.size();i++){
-            int diff=abs(pre[i]-suf[i+1]);
+            pre+=nums[i];
+            int check=0;
+            if(k<n) check=((sm-pre)/(n-k));
+            int diff=abs((pre/k++)-check);
             if(diff<mn){
                 mn=diff;
                 mnidx=i;
