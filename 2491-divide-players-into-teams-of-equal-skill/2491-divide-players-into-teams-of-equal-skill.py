@@ -1,23 +1,16 @@
-class Solution {
-public:
-    long long dividePlayers(vector<int>& s) {
-        sort(s.begin(),s.end());
-        long long  st=0,end=s.size()-1,ans=0,p=-1;
-        vector<pair<int,int>> v;
-        while(st<end){
-            v.push_back({s[st],s[end]});
-            ans+=s[st]*s[end];
-            if(p==-1){
-                p=s[st++]+s[end--];
-            }
-            else{
-                int check=s[st++]+s[end--];
-                if(check!=p){
-                    return -1;
-                }else p=check;
-            }
-            
-        }
-        return ans;
-    }
-};
+class Solution:
+    def dividePlayers(self, s: List[int]) -> int:
+        s.sort()
+        st=0;end=len(s)-1;prod=0;p=-1;
+        while st<end:
+            prod+=s[st]*s[end]
+            if p==-1:
+                p=s[st]+s[end]
+            elif s[st]+s[end]!=p:
+                return -1
+            else:
+                p=s[st]+s[end]
+            st+=1
+            end-=1
+        return prod
+        
