@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minimumAverageDifference(vector<int>& nums) {
-        long long sm=0,n=nums.size(),k=1,j=n,mn=INT_MAX,mnidx=0;
+        long long sm=0,n=nums.size(),k=1,mn=INT_MAX,mnidx=0;
         vector<int> pre,suf(n+1);
         for(auto it:nums){
             sm+=it;
