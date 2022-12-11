@@ -6,17 +6,16 @@ public:
       int ans=0;
       unordered_set<int> mp;
       for(auto it:arr) mp.insert(it);
-      for (int i = 0; i < arr.size()-1; i++) {
+      for (auto i:arr) {
           int cnt=1;
-          long long st=arr[i];
+          long long st=i;
           while(st<=(INT_MAX)/2 and mp.count(st)==1){
               st*=st;
               cnt++; 
-          }ans=max(ans,cnt-1);
+          }
+          ans=max(ans,cnt-1);
       }
-      if(ans==1)
-          return -1;
-      return ans;
+      return ans==1?-1:ans;
     }
     
 };
