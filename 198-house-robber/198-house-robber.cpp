@@ -13,12 +13,12 @@ public:
     }
     int rob(vector<int>& nums) {
         int n=nums.size();
-        int arr[n];
+        int a[n];
         for(int i=0;i<n;i++)
-            arr[i]=nums[i];
+            a[i]=nums[i];
         int help[n+1];
         for(int i=0;i<=n;i++)
             help[i]=-1;
-        return helper(arr,n,help);
+        return helper(a,n,help);
     }
 };
