@@ -4,14 +4,10 @@ public:
         vector<int> ans(t.size());
         stack<int>s;
         for(int i=t.size()-1;i>=0;i--){
-            if(i==t.size()-1)
-               ans[i]=0;
+            if(i==t.size()-1) ans[i]=0;
             else{
                 while(s.size() and t[i] >= t[s.top()]) s.pop();
-                if(!s.empty())
-                    ans[i]=s.top()-i;
-                else
-                    ans[i]=0;
+                ans[i]=s.empty()?0:s.top()-i;
             }
             s.push(i);
         }
