@@ -1,6 +1,7 @@
 class Solution {
+     
 public:
-    bool hasPath(vector<vector<int>> &graph,int n,int a,int b,vector<bool> &vis){
+    bool hasPath(unordered_map<int, vector<int>> &graph,int n,int a,int b,vector<bool> &vis){
         if(a==b){
             return true;
         }
@@ -13,13 +14,12 @@ public:
         return false;
     }
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        vector<vector<int>> graph(n);
-        for(auto i:edges){
-            graph[i[0]].push_back(i[1]);
-            graph[i[1]].push_back(i[0]);
+        unordered_map<int, vector<int>> mp;
+        for(int i = 0; i < edges.size(); i++){
+            mp[edges[i][0]].push_back(edges[i][1]);
+            mp[edges[i][1]].push_back(edges[i][0]);
         }
-        
         vector<bool> visited(n,false);
-        return hasPath(graph,n,source,destination,visited);
+        return hasPath(mp,n,source,destination,visited);
     }
 };
