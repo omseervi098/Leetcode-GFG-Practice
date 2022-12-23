@@ -1,23 +1,27 @@
 class Solution {
 public:
-    int find(vector<int> &prices,int st,bool buy,vector<vector<int>> &v){
-        if(st>=prices.size()){
-            return 0;
+    int dfs(vector<int> &p,bool buy,int i,vector<vector<int>> &dp){
+        if (i>=p.size()) return 0;
+        if(dp[buy][i]!=-1) return dp[buy][i];
+        int ans=0;
+        if(!buy){
+            int a=0;
+            if(i<p.size())
+                a=-p[i]+dfs(p,!buy,i+1,dp);//if buying
+            int b=dfs(p,buy,i+1,dp);//not buying
+            return dp[buy][i]=max(a,b);
         }
-        if(v[st][buy]!=-1)return v[st][buy];
         if(buy){
-            int notbuy=find(prices,st+1,buy,v);
-            int bbuy=-prices[st]+find(prices,st+1,!buy,v);
-            return v[st][buy]=max(notbuy,bbuy);
+            int a=0;
+            if(i<p.size())
+                a=p[i]+dfs(p,!buy,i+2,dp);//if selling 
+            int b=dfs(p,buy,i+1,dp);//not selling
+            return dp[buy][i]=max(a,b);
         }
-        else {
-            int notsell=find(prices,st+1,buy,v);
-            int sell=prices[st]+find(prices,st+2,!buy,v);
-            return v[st][buy]=max(notsell,sell);
-        }
+        return 0;
     }
     int maxProfit(vector<int>& prices) {
-        vector<vector<int>> v(prices.size(),vector<int>(2,-1));
-        return find(prices,0,1,v);
+        vector<vector<int>> dp(2,vector<int>(prices.size()+1,-1));
+        return dfs(prices,false,0,dp);
     }
 };
