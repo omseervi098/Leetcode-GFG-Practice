@@ -19,24 +19,18 @@ public:
         for(int i=0;i<people.size();i++){
             if(people[i]!=INT_MAX){
                 int limitleft=limit-people[i];
-                if(limitleft==0){
+                if(limitleft==0)
                     cnt++;
-                    continue;
-                }else if(limitleft<0){
-                    continue;
-                }
-                //bINARY Search to get max element which is less than limitleft
-                int val=binarysearch(people,i+1,limitleft);
-               
-                if(val!=-1){
-                    cout<<people[val]<<endl;
-                    people[val]=INT_MAX;
-                    cnt++;
-                }else{
-                    cnt++;
+                else if(limitleft>0){
+                    //Binary Search to get max element which is less than limitleft
+                    int val=binarysearch(people,i+1,limitleft);
+                    if(val!=-1){
+                        people[val]=INT_MAX; //change val to mark person visited
+                        cnt++;
+                    }else
+                        cnt++; //if we get no pair then take single person on boat
                 }
             }
-            
         }
         return cnt;
     }
