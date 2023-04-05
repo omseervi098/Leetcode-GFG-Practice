@@ -11,17 +11,12 @@ class Solution {
     }
     public:
     int minimizeArrayValue(vector<int>& nums) {
-        int mn=*min_element(nums.begin(),nums.end());
-        int mx=*max_element(nums.begin(),nums.end());
-        while(mn<=mx){
-            long long mid=(mn+mx)/2;
-            cout<<mid<<" ";
-            if(isvalid(nums,mid)){
-                mx=mid-1;
-            }else{
-                mn=mid+1;
-            }
+        long long sm=0;int mx=0;
+        for(int i=0;i<nums.size();i++){
+            sm+=nums[i];
+            int tmp=ceil(sm/double(i+1));
+            mx=max(mx,tmp);
         }
-        return mn;
+        return mx;
     }
 };
