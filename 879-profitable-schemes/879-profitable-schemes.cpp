@@ -7,7 +7,6 @@ public:
             return 0;
         }
         if(st>=p.size()){
-            // if(minprofit==0 and profit==0) return 1;
             if(profit<=0) return 1;
             return 0;
         }
@@ -16,7 +15,6 @@ public:
         //excluding
         int a=helper(p,g,profit,n,st+1)%mod;
         //including
-       
         int b=helper(p,g,profit-p[st],n-g[st],st+1)%mod;
         return dp[st][n][profit]=(a+b)%mod;
     }
