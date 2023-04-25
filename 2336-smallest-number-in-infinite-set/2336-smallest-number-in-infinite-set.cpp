@@ -2,23 +2,18 @@ class SmallestInfiniteSet {
     set<int> s;
     public:
     SmallestInfiniteSet() {
-        for(int i=1;i<=1000;i++) s.insert(i);
+        // for(int i=1;i<=1000;i++) s.insert(i);
     }
     
     int popSmallest() {
-        int val=*s.begin();
-        s.erase(val);
+        int p=1;
+        while(s.count(p)) p++;
+        int val=p++;
+        s.insert(val);
         return val;
     }
     
     void addBack(int num) {
-        s.insert(num);
+        if(s.count(num)) s.erase(num);
     }
 };
-
-/**
- * Your SmallestInfiniteSet object will be instantiated and called as such:
- * SmallestInfiniteSet* obj = new SmallestInfiniteSet();
- * int param_1 = obj->popSmallest();
- * obj->addBack(num);
- */
