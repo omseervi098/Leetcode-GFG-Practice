@@ -1,6 +1,6 @@
+#define ll long long
 class Solution {
-public:
- 
+    public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         int n=nums.size();
         set<vector<int>> v;
@@ -9,8 +9,7 @@ public:
         for(int i=0;i<n;i++){
             for(int j=i+1;j<n;j++){
                 for(int k=j+1;k<n;k++){
-            
-                    long long temp=(long long)target-(long long)nums[k]-(long long)nums[i]-(long long)nums[j];
+                    ll temp=(ll)target-(ll)nums[k]-(ll)nums[i]-(ll)nums[j];
                     while(m[temp]>0){
                         v.insert({nums[i],nums[j],(int)temp,nums[k]});
                         m[temp]--;
