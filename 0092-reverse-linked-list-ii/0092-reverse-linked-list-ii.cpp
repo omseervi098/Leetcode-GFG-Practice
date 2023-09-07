@@ -26,14 +26,15 @@ public:
             prevleft=head;
             head=head->next;
         }
-        ListNode *leftst=head;
         while(head!=NULL and n-->0){
             prevRight=head;
             head=head->next;
         }
         prevRight->next=NULL;
         ListNode* newLeft=reverse(prevleft?prevleft->next:h);
-        leftst->next=head;
+        if(prevleft)
+             prevleft->next->next=head;
+        else h->next=head;
         if(prevleft)
             prevleft->next=newLeft;
         else h=newLeft;
