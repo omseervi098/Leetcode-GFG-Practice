@@ -28,10 +28,9 @@ public:
             left--;
         }
         ListNode *leftst=head;
-        while(head!=NULL and n>0){
+        while(head!=NULL and n-->0){
             prevRight=head;
             head=head->next;
-            n--;
         }
         prevRight->next=NULL;
         ListNode* newLeft=reverse(leftst);
