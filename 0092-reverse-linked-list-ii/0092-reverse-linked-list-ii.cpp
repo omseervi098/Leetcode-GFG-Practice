@@ -22,10 +22,9 @@ public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         int n=right-left+1;
         ListNode* prevleft=NULL,*prevRight=NULL,*h=head;
-        while(head->next!=NULL and left>1){
+        while(head->next!=NULL and left-->1){
             prevleft=head;
             head=head->next;
-            left--;
         }
         ListNode *leftst=head;
         while(head!=NULL and n-->0){
