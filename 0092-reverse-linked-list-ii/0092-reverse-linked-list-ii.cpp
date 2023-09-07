@@ -32,7 +32,7 @@ public:
             head=head->next;
         }
         prevRight->next=NULL;
-        ListNode* newLeft=reverse(leftst);
+        ListNode* newLeft=reverse(prevleft?prevleft->next:h);
         leftst->next=head;
         if(prevleft)
             prevleft->next=newLeft;
