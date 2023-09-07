@@ -32,12 +32,14 @@ public:
         }
         prevRight->next=NULL;
         ListNode* newLeft=reverse(prevleft?prevleft->next:h);
-        if(prevleft)
+        if(prevleft){
              prevleft->next->next=head;
-        else h->next=head;
-        if(prevleft)
-            prevleft->next=newLeft;
-        else h=newLeft;
-        return h ;
+             prevleft->next=newLeft;
+        }
+        else{ 
+            h->next=head;
+            h=newLeft;
+        }
+        return h;
     }
 };
