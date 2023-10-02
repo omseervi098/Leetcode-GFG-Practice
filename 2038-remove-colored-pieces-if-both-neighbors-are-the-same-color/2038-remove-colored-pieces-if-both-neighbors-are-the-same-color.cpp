@@ -8,7 +8,6 @@ public:
             if(c[j]=='A') sm1+=max(i-j-2,0);
             else sm2+=max(i-j-2,0);
         }
-        if(sm2>=sm1) return false;
-        return true;
+        return sm2>=sm1?false:true;
     }
 };
