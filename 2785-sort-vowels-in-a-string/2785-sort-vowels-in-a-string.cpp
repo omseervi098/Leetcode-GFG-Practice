@@ -1,21 +1,27 @@
 class Solution {
 public:
     string sortVowels(string s) {
-        map<char,int> mp;
+        // doing it in O(N)
+        vector<int> freq(52,0);
         vector<char> v={'A','E','I','O','U','a','e','i','o','u'};
-        for(auto it:s) if(find(v.begin(),v.end(),it)!=v.end()) mp[it]++;
-        v.clear();
-        for(auto it:mp) v.push_back(it.first);
+        for(auto it:s){
+            if(find(v.begin(),v.end(),it)!=v.end()){
+                if(it>='A' and it<='Z') freq[it-'A']++;
+                else freq[it-'a'+26]++;
+            }
+        }
         string newstring;
         int k=0;
         for(auto i:s){
-            if(mp.count(i)==1){
-                if(mp[v[k]]>1){
+            if(find(v.begin(),v.end(),i)!=v.end()){
+                while(freq[v[k]>='A' and v[k]<='Z'?(v[k]-'A'):(v[k]-'a'+26)]<=0 and k<10) k++;
+                bool check=v[k]>='A' and v[k]<='Z';
+                if(freq[check==true?(v[k]-'A'):(v[k]-'a'+26)]>1){
                     newstring+=v[k];
-                    mp[v[k]]--;
-                }else if(mp[v[k]]==1){
+                    freq[check==true?(v[k]-'A'):(v[k]-'a'+26)]--;
+                }else{
                     newstring+=v[k];
-                    mp[v[k++]]--;
+                    freq[check==true?(v[k++]-'A'):(v[k++]-'a'+26)]--;
                 }
             }else{
                 newstring+=i;
