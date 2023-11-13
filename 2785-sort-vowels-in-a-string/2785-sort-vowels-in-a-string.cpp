@@ -15,13 +15,12 @@ public:
             if(find(v.begin(),v.end(),i)!=v.end()){
                 while(freq[v[k]>='A' and v[k]<='Z'?(v[k]-'A'):(v[k]-'a'+26)]<=0 and k<10) k++;
                 bool check=v[k]>='A' and v[k]<='Z';
-                if(freq[check==true?(v[k]-'A'):(v[k]-'a'+26)]>1){
-                    i=v[k];
+                i=v[k];
+                if(freq[check==true?(v[k]-'A'):(v[k]-'a'+26)]>1)
                     freq[check==true?(v[k]-'A'):(v[k]-'a'+26)]--;
-                }else{
-                    i=v[k];
+                else
                     freq[check==true?(v[k++]-'A'):(v[k++]-'a'+26)]--;
-                }
+            
             }
         }
         return s;
