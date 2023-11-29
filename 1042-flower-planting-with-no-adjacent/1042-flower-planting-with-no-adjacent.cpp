@@ -7,22 +7,16 @@ class Solution {
         while(q.size()){
             int front=q.front();q.pop();
             vector<bool> temp(5,false);
-            int cnt=0;
             for(auto i:adj[front]){
                 if(vis[i]){
-                     for(int j=1;j<=4;j++){
-                        if(v[i-1]==j){
-                            temp[j]=true;
-                        }
-                    }
+                    for(int j=1;j<=4;j++)
+                        if(v[i-1]==j) temp[j]=true;
                     continue;
                 }
                 q.push(i);
                 vis[i]=1;
             }
-            for(int i=1;i<=4;i++){
-                if(!temp[i]) v[front-1]=i;
-            }
+            for(int i=1;i<=4;i++) if(!temp[i]) v[front-1]=i;
         }
     }
 public:
@@ -35,9 +29,8 @@ public:
         vector<bool> visited(n+1,false);
         vector<int> v(n,-1);
         for(int i=1;i<=n;i++){
-            if(!visited[i]){
+            if(!visited[i])
                 bfs(i,adj,visited,1,v);
-            }
         }
         return v;
     }
