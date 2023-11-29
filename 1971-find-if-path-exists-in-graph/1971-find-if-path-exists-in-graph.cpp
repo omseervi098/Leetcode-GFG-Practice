@@ -1,27 +1,25 @@
 class Solution {
-     
 public:
-    
-    bool validPath(int n, vector<vector<int>>& edges, int s, int d) {
-        unordered_map<int, vector<int>> mp;
-        for(int i = 0; i < edges.size(); i++){
-            mp[edges[i][0]].push_back(edges[i][1]);
-            mp[edges[i][1]].push_back(edges[i][0]);
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+        vector<vector<int>> adj(n);
+        for(auto i:edges){
+            adj[i[0]].push_back(i[1]);
+            adj[i[1]].push_back(i[0]);
         }
-        vector<bool> vis(n,false);
         queue<int> q;
-        q.push(s);
-        vis[s]=true;
+        vector<bool> visited(n);
+        q.push(source);
+        visited[source]=1;
         while(q.size()){
-            int i=q.front();q.pop();
-            if(i==d) return true;
-            for(auto j:mp[i])
-            {
-                if(!vis[j]){
-                    q.push(j);
-                    vis[j]=true;
-                }
-            }        
-        }return false;
+            int front=q.front();
+            if(front==destination) return true;
+            q.pop();
+            for(auto i:adj[front]){
+                if(visited[i]) continue;
+                q.push(i);
+                visited[i]=1;
+            }
+        }
+        return false;
     }
 };
